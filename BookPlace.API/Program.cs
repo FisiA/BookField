@@ -79,6 +79,19 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// Apply any pending migrations and seed default data
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    // Seed default user roles
+    await ApplicationSeeder.SeedDefaultUserRoles(roleManager);
+
+    // Seed default super admin user
+    await ApplicationSeeder.SeedDefaultSuperAdminUser(userManager);
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
