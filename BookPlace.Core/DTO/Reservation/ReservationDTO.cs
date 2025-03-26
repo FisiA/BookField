@@ -1,4 +1,4 @@
-﻿namespace BookPlace.Core.DTO
+﻿namespace BookPlace.Core.DTO.Reservation
 {
     public class ReservationDTO
     {

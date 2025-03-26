@@ -2,7 +2,7 @@
 using BookPlace.Core.Application.Interfaces;
 using BookPlace.Core.Domain.Entities;
 using BookPlace.Core.Domain.Enum;
-using BookPlace.Core.DTO;
+using BookPlace.Core.DTO.Reservation;
 using BookPlace.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

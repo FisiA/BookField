@@ -1,5 +1,5 @@
 ﻿using BookPlace.Core.Domain.Enum;
-using BookPlace.Core.DTO;
+using BookPlace.Core.DTO.Reservation;
 
 namespace BookPlace.Core.Application.Interfaces
 {

@@ -1,6 +1,7 @@
 using BookPlace.Core.Application.Interfaces;
 using BookPlace.Core.Domain.Enum;
-using BookPlace.Core.DTO;
+using BookPlace.Core.DTO.Reservation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookPlace.API.Controllers;
@@ -16,6 +17,7 @@ public class ReservationsController : ControllerBase
         _reservationService = reservationService;
     }
 
+    [Authorize]
     [HttpGet("GetAll/{reservationStatus}")]
     public async Task<IActionResult> GetAllReservations(ReservationState reservationStatus = ReservationState.All)
     {
@@ -23,6 +25,7 @@ public class ReservationsController : ControllerBase
         return Ok(res);
     }
 
+    [Authorize]
     [HttpGet("GetById/{id}")]
     public async Task<IActionResult> GetReservationById(Guid id)
     {
@@ -39,9 +42,10 @@ public class ReservationsController : ControllerBase
     public async Task<IActionResult> CreateReservation(ReservationDTO reservationDetails)
     {
         var newReservation = await _reservationService.CreateReservationAsync(reservationDetails);
-        return CreatedAtAction(nameof(GetReservationById), new { id = newReservation.Id }, newReservation);
+        return Ok(newReservation);
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateReservation(Guid id, ReservationDTO reservationDetails)
     {
@@ -67,6 +71,7 @@ public class ReservationsController : ControllerBase
         return Ok(reservationConfirmed);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteReservation(Guid id)
     {
