@@ -36,7 +36,8 @@ namespace BookPlace.Infrastructure.Data
         // Set audit fields here
         private void SetAuditFields()
         {
-            var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();
+            List<string> excludedEntities = new List<string> { "IdentityRole", "IdentityUserRole" };
+            var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added && !excludedEntities.Contains(e.Entity.GetType().Name)).ToList();
             addedEntities.ForEach(e =>
             {
                 // Uncomment this when we implement User Register/Login
@@ -47,7 +48,7 @@ namespace BookPlace.Infrastructure.Data
                 e.Property(nameof(BaseEntity.IsDeleted)).CurrentValue = false;
             });
 
-            var modifiedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Modified).ToList();
+            var modifiedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Modified && !excludedEntities.Contains(e.Entity.GetType().Name)).ToList();
             modifiedEntities.ForEach(e =>
             {
                 // Uncomment this when we implement User Register/Login
