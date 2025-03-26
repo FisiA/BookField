@@ -60,9 +60,6 @@ namespace BookPlace.API.Configs
             app.UseSwaggerUI(opts =>
             {
                 opts.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Place API");
-                //opts.RoutePrefix = string.Empty;
-                opts.DefaultModelExpandDepth(0);
-                opts.DefaultModelsExpandDepth(-1);
             });
         }
     }

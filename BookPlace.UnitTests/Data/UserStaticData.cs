@@ -1,4 +1,5 @@
-﻿using BookPlace.Core.DTO.User;
+﻿using BookPlace.Core.Domain.Entities;
+using BookPlace.Core.DTO.User;
 
 namespace BookPlace.UnitTests.Data
 {
@@ -25,7 +26,7 @@ namespace BookPlace.UnitTests.Data
             };
         }
 
-        public static List<UserDTO> GetUsers()
+        public static List<UserDTO> GetUserDtoList()
         {
             return new List<UserDTO>
             {
@@ -46,6 +47,37 @@ namespace BookPlace.UnitTests.Data
                     Surname = "User",
                 },
                 new UserDTO
+                {
+                    Id = "3878fd48-e988-41ad-ba83-35b2e85fd4c5",
+                    UserName = "hp_user",
+                    Email = "hp@email.com",
+                    Name = "HP",
+                    Surname = "User",
+                }
+            };
+        }
+
+        public static List<User> GetUsers()
+        {
+            return new List<User>
+            {
+                new User
+                {
+                    Id = "fc15b06f-9d40-4fd3-8caa-54d09be238bf",
+                    UserName = "dell_user",
+                    Email = "dell@email.com",
+                    Name = "Dell",
+                    Surname = "User",
+                },
+                new User
+                {
+                    Id = "9d3a6b40-3983-4905-9d85-322f26bbc1b5 ",
+                    UserName = "acer_user",
+                    Email = "acer@email.com",
+                    Name = "Acer",
+                    Surname = "User",
+                },
+                new User
                 {
                     Id = "3878fd48-e988-41ad-ba83-35b2e85fd4c5",
                     UserName = "hp_user",

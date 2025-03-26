@@ -44,7 +44,7 @@ namespace BookPlace.API.Controllers
             }
 
             // Username found. Now check password
-            var signInResult = await _userService.CheckSignInAsync(model);
+            var signInResult = await _userService.CheckSignInAsync(user, model.Password);
             if (!signInResult.Succeeded)
             {
                 return Unauthorized();
@@ -57,7 +57,7 @@ namespace BookPlace.API.Controllers
                 new Claim("FullName", $"{user.Name} {user.Surname}")
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecurityKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
