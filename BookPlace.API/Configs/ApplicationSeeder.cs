@@ -31,7 +31,6 @@ namespace BookPlace.API.Configs
                     Email = "fisnik_alidemi@hotmail.com",
                     NormalizedEmail = "FISNIK_ALIDEMI@HOTMAIL.COM",
                     EmailConfirmed = true,
-                    PasswordHash = "",
                     SecurityStamp = Guid.NewGuid().ToString(),
                     ConcurrencyStamp = Guid.NewGuid().ToString(),
                     PhoneNumber = "",
@@ -46,9 +45,12 @@ namespace BookPlace.API.Configs
                 };
 
                 // Create the user
-                await userManager.CreateAsync(superAdminUser, "SuperAdmin123!");
-                // Assign the user to the SuperAdmin role
-                await userManager.AddToRoleAsync(superAdminUser, UserRole.SuperAdmin.ToString());
+                var result = await userManager.CreateAsync(superAdminUser, "SuperAdmin123!");
+                if (result.Succeeded)
+                {
+                    // Assign the user to the SuperAdmin role
+                    var roleResult = await userManager.AddToRoleAsync(superAdminUser, UserRole.SuperAdmin.ToString());
+                }
             }
         }
     }

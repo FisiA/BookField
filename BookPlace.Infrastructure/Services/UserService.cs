@@ -18,12 +18,12 @@ namespace BookPlace.Infrastructure.Services
             _signInManager = signInManager;            
         }
 
-        public async Task<UserDTO> FindByUsernameAsync(string username)
+        public async Task<User> FindByUsernameAsync(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user != null)
             {
-                return _mapper.Map<UserDTO>(user);
+                return user;
             }
 
             return null;
@@ -34,9 +34,9 @@ namespace BookPlace.Infrastructure.Services
             return await _userManager.CreateAsync(_mapper.Map<User>(user), user.Password);
         }
 
-        public async Task<SignInResult> CheckSignInAsync(LoginUserDTO user)
+        public async Task<SignInResult> CheckSignInAsync(User user, string password)
         {
-            return await _signInManager.CheckPasswordSignInAsync(_mapper.Map<User>(user), user.Password, false);
+            return await _signInManager.CheckPasswordSignInAsync(user, password, false);
         }
     }
 }

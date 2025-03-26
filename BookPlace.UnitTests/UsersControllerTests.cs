@@ -1,5 +1,6 @@
 ﻿using BookPlace.API.Controllers;
 using BookPlace.Core.Application.Interfaces;
+using BookPlace.Core.Domain.Entities;
 using BookPlace.Core.DTO.User;
 using BookPlace.UnitTests.Data;
 using Microsoft.AspNetCore.Identity;
@@ -63,7 +64,7 @@ namespace BookPlace.UnitTests
         {
             // Arrange
             var loginUserDto = UserStaticData.GetLoginUserDtoDetails();
-            _userServiceMock.Setup(s => s.FindByUsernameAsync(loginUserDto.UserName)).ReturnsAsync((UserDTO)null);
+            _userServiceMock.Setup(s => s.FindByUsernameAsync(loginUserDto.UserName)).ReturnsAsync((User)null);
 
             // Act
             var result = await _userController.Login(loginUserDto);
@@ -80,7 +81,7 @@ namespace BookPlace.UnitTests
             var loginUserDto = UserStaticData.GetLoginUserDtoDetails();
             var userFound = UserStaticData.GetUsers().Find(u => u.UserName == loginUserDto.UserName);
             _userServiceMock.Setup(s => s.FindByUsernameAsync(loginUserDto.UserName)).ReturnsAsync(userFound);
-            _userServiceMock.Setup(s => s.CheckSignInAsync(loginUserDto)).ReturnsAsync(aspNetCoreIdentity.SignInResult.Failed);
+            _userServiceMock.Setup(s => s.CheckSignInAsync(userFound,loginUserDto.Password)).ReturnsAsync(aspNetCoreIdentity.SignInResult.Failed);
 
             // Act
             var result = await _userController.Login(loginUserDto);
@@ -97,8 +98,8 @@ namespace BookPlace.UnitTests
             var loginUserDto = UserStaticData.GetLoginUserDtoDetails();
             var userFound = UserStaticData.GetUsers().Find(u => u.UserName == loginUserDto.UserName);
             _userServiceMock.Setup(s => s.FindByUsernameAsync(loginUserDto.UserName)).ReturnsAsync(userFound);
-            _userServiceMock.Setup(s => s.CheckSignInAsync(loginUserDto)).ReturnsAsync(aspNetCoreIdentity.SignInResult.Success);
-            _configurationMock.Setup(c => c["Jwt:SecurityKey"]).Returns("dd459b848f43a51f2f99d05736c3db6eebab2294459f82025578126cfd5649b86b737735f6a2be072b6606966e7afe4525bec06c0cf9a4bd6493cb6ee17934a9");
+            _userServiceMock.Setup(s => s.CheckSignInAsync(userFound, loginUserDto.Password)).ReturnsAsync(aspNetCoreIdentity.SignInResult.Success);
+            _configurationMock.Setup(c => c["Jwt:SecretKey"]).Returns("dd459b848f43a51f2f99d05736c3db6eebab2294459f82025578126cfd5649b86b737735f6a2be072b6606966e7afe4525bec06c0cf9a4bd6493cb6ee17934a9");
             _configurationMock.Setup(c => c["Jwt:Issuer"]).Returns("BookPlace");
             _configurationMock.Setup(c => c["Jwt:Audience"]).Returns("BookPlace-Users");
 
@@ -112,6 +113,5 @@ namespace BookPlace.UnitTests
             Assert.NotNull(returnValue);
             Assert.IsType<string>(returnValue);
         }
-
     }
 }
