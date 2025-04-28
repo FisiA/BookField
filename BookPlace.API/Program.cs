@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -19,10 +18,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Register AutoMapper for mapping real model entities to DTOs and vice vers
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// Register DbContext with SQL Server Connection String
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServerConnection"])
-);
+
+// Check environment to choose DB provider
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    // Register DbContext with SQL Server Connection String
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServerConnection"])
+    );
+}
+
 // Add User Management
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
@@ -113,3 +118,5 @@ void ConfigureServices(IServiceCollection services)
     services.AddScoped<IReservationsService, ReservationsService>();
     services.AddScoped<IUserService, UserService>();
 }
+
+public partial class Program { }

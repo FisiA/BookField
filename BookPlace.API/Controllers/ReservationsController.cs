@@ -55,8 +55,7 @@ public class ReservationsController : ControllerBase
         }
 
         var updatedReservation = await _reservationService.UpdateReservationAsync(reservationDetails);
-
-        if(updatedReservation == null)
+        if (updatedReservation == null)
         {
             return NotFound();
         }
