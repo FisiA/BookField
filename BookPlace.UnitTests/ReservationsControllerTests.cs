@@ -23,7 +23,7 @@ namespace BookPlace.UnitTests
         [InlineData(ReservationState.All)]
         [InlineData(ReservationState.Confirmed)]
         [InlineData(ReservationState.Uncofirmed)]
-        public async Task GetAllReservationsByStatus_ReturnsOkResult_WithListOfReservations(ReservationState reservationState)
+        public async Task GetAllReservations_ShouldReturnOkWithListOfReservationsPerStatus(ReservationState reservationState)
         {
             // Arrange
             var reservations = ReservationStaticData.GetReservations();
@@ -39,7 +39,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task GetReservationById_ReturnsOkResult_WithReservation()
+        public async Task GetReservationById_WithExistentId_ShouldReturnOk()
         {
             // Arrange
             var reservationId = Guid.Parse("857e93da-688a-42d7-bfc4-1cc1da685770");
@@ -56,7 +56,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task GetReservationById_ReturnsNotFound_WhenNoReservationFound()
+        public async Task GetReservationById_WithNonExistentId_ShouldReturnNotFound()
         {
             // Arrange
             var reservationId = Guid.NewGuid();
@@ -72,7 +72,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task CreateReservation_ReturnsOkResult_WithNewReservation()
+        public async Task CreateReservation_ShouldReturnOkWithNewReservation()
         {
             // Arrange
             var reservationDetails = ReservationStaticData.GetReservations().First();
@@ -89,7 +89,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task UpdateReservation_ReturnsOkResult_WithUpdatedReservation()
+        public async Task UpdateReservation_WithExistentId_ShouldReturnOk()
         {
             // Arrange
             var reservationDetails = ReservationStaticData.GetReservations().First();
@@ -106,7 +106,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task UpdateReservation_ReturnsBadRequest_WhenIdMismatch()
+        public async Task UpdateReservation_WithIdMismatch_ShouldReturnBadRequest()
         {
             // Arrange
             var reservationDetails = ReservationStaticData.GetReservations().First();
@@ -122,7 +122,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task UpdateReservation_ReturnsNotFound_WhenReservationNotFound()
+        public async Task UpdateReservation_WithNonExistentId_ShouldReturnNotFound()
         {
             // Arrange
             var reservationDetails = ReservationStaticData.GetReservations().First();
@@ -137,7 +137,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task ConfirmReservation_ReturnsOkResult_WithConfirmationStatus()
+        public async Task ConfirmReservation_ShouldReturnOkWithConfirmationStatus()
         {
             // Arrange
             var reservationId = Guid.NewGuid();
@@ -155,7 +155,7 @@ namespace BookPlace.UnitTests
         }
 
         [Fact]
-        public async Task DeleteReservation_ReturnsOkResult_WithDeletionStatus()
+        public async Task DeleteReservation_ShouldReturnOkWithDeletionStatus()
         {
             // Arrange
             var reservationId = Guid.NewGuid();

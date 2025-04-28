@@ -8,7 +8,7 @@ namespace BookPlace.Core.Application.Interfaces
         Task<List<ReservationDTO>> GetAllReservationsAsync(ReservationState status);
         Task<ReservationDTO> GetReservationByIdAsync(Guid id);
         Task<ReservationDTO> CreateReservationAsync(ReservationDTO reservationDetails);
-        Task<ReservationDTO> UpdateReservationAsync(ReservationDTO reservationDetails);
+        Task<ReservationDTO?> UpdateReservationAsync(ReservationDTO reservationDetails);
         Task<bool> DeleteReservationAsync(Guid id);
         Task<bool> ConfirmReservationAsync(Guid id);
     }

@@ -44,9 +44,18 @@ namespace BookPlace.Infrastructure.Services
             return _mapper.Map<ReservationDTO>(reservation);
         }
 
-        public async Task<ReservationDTO> UpdateReservationAsync(ReservationDTO reservationDetails) 
+        public async Task<ReservationDTO?> UpdateReservationAsync(ReservationDTO reservationDetails) 
         {
-            var reservation = _mapper.Map<Reservation>(reservationDetails);
+            var reservation = await _dbContext.Reservations.FindAsync(reservationDetails.Id);
+            if(reservation == null)
+            {
+                return null;
+            }
+
+            reservation.NameAndSurname = reservationDetails.NameAndSurname;
+            reservation.Email = reservationDetails.Email;
+            reservation.ReservationFrom = reservationDetails.ReservationFrom;
+            reservation.ReservationTo = reservationDetails.ReservationTo;
             _dbContext.Reservations.Update(reservation);
             await _dbContext.SaveChangesAsync();
             return _mapper.Map<ReservationDTO>(reservation);
