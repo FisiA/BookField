@@ -12,10 +12,10 @@ namespace BookPlace.API.Controllers
     [Route("/v1/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUsersService _userService;
         private readonly IConfiguration _configuration;
 
-        public UsersController(IUserService userService, IConfiguration configuration)
+        public UsersController(IUsersService userService, IConfiguration configuration)
         {
             _userService = userService;
             _configuration = configuration;

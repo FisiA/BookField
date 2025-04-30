@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookPlace.IntegrationTests.Utils
 {
-    public class CustomTestDbFixture : IDisposable
+    public class ReservationsDbFixture : IDisposable
     {
         public AppDbContext DbContext { get; private set; }
         public IMapper Mapper { get; private set; }
 
-        public CustomTestDbFixture()
+        public ReservationsDbFixture()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase("BookPlaceServicesTestIMDb")
+                .UseInMemoryDatabase("ReservationsServiceTestIMDb")
                 .Options;
 
             DbContext = new AppDbContext(options);
@@ -23,7 +23,7 @@ namespace BookPlace.IntegrationTests.Utils
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<MappingProfile>(); // Replace with your actual Profile
+                cfg.AddProfile<MappingProfile>();
             });
 
             Mapper = config.CreateMapper();

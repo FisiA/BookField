@@ -13,13 +13,13 @@ namespace BookPlace.UnitTests
 {
     public class UsersControllerTests
     {
-        private readonly Mock<IUserService> _userServiceMock;
+        private readonly Mock<IUsersService> _userServiceMock;
         private readonly Mock<IConfiguration> _configurationMock;
         private readonly UsersController _userController;
 
         public UsersControllerTests()
         {
-            _userServiceMock = new Mock<IUserService>();
+            _userServiceMock = new Mock<IUsersService>();
             _configurationMock = new Mock<IConfiguration>();
             _userController = new UsersController(_userServiceMock.Object, _configurationMock.Object);
         }

@@ -116,7 +116,7 @@ app.Run();
 void ConfigureServices(IServiceCollection services)
 {
     services.AddScoped<IReservationsService, ReservationsService>();
-    services.AddScoped<IUserService, UserService>();
+    services.AddScoped<IUsersService, UsersService>();
 }
 
 public partial class Program { }

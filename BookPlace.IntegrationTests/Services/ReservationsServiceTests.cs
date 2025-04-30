@@ -9,13 +9,13 @@ using FluentAssertions;
 
 namespace BookPlace.IntegrationTests.Services
 {
-    public class ReservationsServiceTests : IClassFixture<CustomTestDbFixture>
+    public class ReservationsServiceTests : IClassFixture<ReservationsDbFixture>
     {
         private readonly AppDbContext _dbContext;
         private readonly IReservationsService _reservationsService;
         private readonly IMapper _mapper;
 
-        public ReservationsServiceTests(CustomTestDbFixture fixture)
+        public ReservationsServiceTests(ReservationsDbFixture fixture)
         {
             _dbContext = fixture.DbContext;
             _mapper = fixture.Mapper;

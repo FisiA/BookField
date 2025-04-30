@@ -19,14 +19,16 @@ namespace BookPlace.API.TestingData
             db.Users.Add(new User
             {
                 Id = "8e07c860-8398-4739-a7f8-c53c786a14ce",
-                UserName = "superadmin",
-                Name = "Fisnik",
-                Surname = "Alidemi",
-                Email = "fisnik_alidemi@hotmail.com",
-                NormalizedEmail = "FISNIK_ALIDEMI@HOTMAIL.COM",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Name = "Admin",
+                Surname = "User",
+                Email = "admin@mailinator.com",
+                NormalizedEmail = "ADMIN@MAILINATOR.COM",
                 EmailConfirmed = true,
-                SecurityStamp = "3b564104-e3f2-4c6d-b660-03cf6934089c",
-                ConcurrencyStamp = "dbf4bfc7-d775-4e00-939e-4e4f6f3b5604",
+                SecurityStamp = "MKMC3LDJJEKGXBHRQUUAWGKOXKWXYCUG",
+                PasswordHash = "AQAAAAIAAYagAAAAEM6uxJwF2iQR4WAcUu2K8kUkrvZc5V/QTnI91+2s41K2vH0G0OIzSWoB5l5ORU+hEw==", // P@ssw0rd@123
+                ConcurrencyStamp = "f481e37d-4aae-41f0-ab58-d2b1eafb47e2",
                 PhoneNumber = "",
                 PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
@@ -40,7 +42,7 @@ namespace BookPlace.API.TestingData
             db.UserRoles.Add(new Microsoft.AspNetCore.Identity.IdentityUserRole<string>
             {
                 UserId = "8e07c860-8398-4739-a7f8-c53c786a14ce",
-                RoleId = "33a0c1ef-b157-4dba-b61a-865913926195"
+                RoleId = "cbda618a-19de-4be3-9764-53d248de5f16"
             });
         }
 
