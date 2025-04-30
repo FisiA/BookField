@@ -7,12 +7,12 @@ using System.Net.Http.Json;
 
 namespace BookPlace.IntegrationTests.Controllers
 {
-    public class ReservationsControllerTests : IClassFixture<CustomWebApplicationFactory>
+    public class ReservationsControllerTests : IClassFixture<ReservationsCustomFactory>
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseURL = "/v1/Reservations";
 
-        public ReservationsControllerTests(CustomWebApplicationFactory factory)
+        public ReservationsControllerTests(ReservationsCustomFactory factory)
         {
             _httpClient = factory.CreateClient();
         }

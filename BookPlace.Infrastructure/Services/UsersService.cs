@@ -7,18 +7,18 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BookPlace.Infrastructure.Services
 {
-    public class UserService : BaseService, IUserService
+    public class UsersService : BaseService, IUsersService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public UserService(AppDbContext dbContext, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager) : base(dbContext, mapper)
+        public UsersService(AppDbContext dbContext, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager) : base(dbContext, mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;            
         }
 
-        public async Task<User> FindByUsernameAsync(string username)
+        public async Task<User?> FindByUsernameAsync(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user != null)

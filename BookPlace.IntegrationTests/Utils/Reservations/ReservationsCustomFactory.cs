@@ -1,6 +1,4 @@
 ﻿using BookPlace.API.TestingData;
-using BookPlace.Core.Domain.Entities;
-using BookPlace.Core.Domain.Enum;
 using BookPlace.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +10,7 @@ namespace BookPlace.IntegrationTests.Utils
 {
     // WebApplicationFactory spins up a real mini web server in memory — without needing to actually deploy or run the app manually
     // With that in place you get: real HTTP pipeline, real middleware (auth, exception handling, routing etc.) and real DI (services, repositories)
-    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
+    public class ReservationsCustomFactory : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -40,7 +38,7 @@ namespace BookPlace.IntegrationTests.Utils
                 // Add a new in-memory DBContext for testing purposes
                 services.AddDbContext<AppDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("BookPlaceControllersTestIMDb");
+                    options.UseInMemoryDatabase("ReservationsControllerTestIMDb");
                 });
 
                 // Run seeders here
@@ -65,12 +63,6 @@ namespace BookPlace.IntegrationTests.Utils
 
         private void SeedDatabase(AppDbContext db)
         {
-            // Add default user roles
-            IntegrationTestingData.AddDefaultUserRoles(db);
-
-            // Add default users and their roles
-            IntegrationTestingData.AddDefaultUsersAndTheirRoles(db);
-
             // Add some default reservations
             IntegrationTestingData.AddDefaultReservations(db);
             
